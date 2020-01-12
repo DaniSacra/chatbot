@@ -7,7 +7,8 @@ class TranslateService
   def initialize params
     @url = "https://translate.yandex.net/api/v1.5/tr.json/translate"
     @key = "trnsl.1.1.20200109T234456Z.8d3dff6472b60726.c215849260fc7f27c9afad7ff2e9ddc28852637d" 
-    @text = params[:text]
+    @text = params["text"]
+    # @text = "Love"
     (params[:lang])? @lang = params[:lang].downcase : @lang="pt"
   end
 
