@@ -10,7 +10,7 @@ Dir["./app/services/**/*.rb"].each {|file| require file }
 class App < Sinatra::Base
 
   get '/' do
-    'Hello world!'   
+    'Hello world!'
   end
 
   post '/webhook' do
@@ -32,5 +32,21 @@ class App < Sinatra::Base
            } 
        } 
     }.to_json
+  end
+
+  get '/home' do
+
+    response = InterpretService.call("translate", params)
+
+    content_type :json, charset: 'utf-8' 
+    { "fulfillmentText": response, 
+      "payload": { 
+          "telegram": { 
+              "text": response, 
+              "parse_mode": "Markdown" 
+           } 
+       } 
+    }.to_json
+
   end
 end
